@@ -20,7 +20,7 @@ public class NameRepository {
         if (foundFulName != null) {
             return false;
         }
-        String[] newNames = Arrays.copyOf(names, names.length + 1); // ["Erik Svensson", null]
+        String[] newNames = Arrays.copyOf(names, names.length + 1);
         newNames[newNames.length - 1] = fullName;
         names = newNames;
         return true;
@@ -30,5 +30,39 @@ public class NameRepository {
         return names.length;
     }
 
+    public static String[] findByFirstName(final String firstName) {
+        // String testName = firstName;
+        String[] result = new String[names.length];
+        int index = 0;
+        for (String name : names) {
+            if (name.split(" ")[0].equalsIgnoreCase(firstName)) {
+                result[index] = name;
+                index++;
+            }
+        }
+        result = Arrays.copyOfRange(result, 0, index);
+        return result;
+    }
 
+    public static String[] findByLastName(final String lastName) {
+        // String testName = lastName;
+        String[] result = new String[names.length];
+        int index = 0;
+        for (String name : names) {
+            if (name.split(" ")[1].equalsIgnoreCase(lastName)) {
+                result[index] = name;
+                index++;
+            }
+        }
+        result = Arrays.copyOfRange(result, 0, index);
+        return result;
+    }
+
+/*
+    public static boolean update(final String original, final String updatedName) {
+        //todo: implement the logic
+
+        return null; //result;
+    }
+*/
 }
