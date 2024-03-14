@@ -16,7 +16,7 @@ public class App {
             System.out.println("testName = " + testName);
         }
 
-        testNames = NameRepository.findByLastName("Svensson");
+        testNames = NameRepository.findByLastName("testsson");
         for (String testName : testNames) {
             System.out.println("testName = " + testName);
         }

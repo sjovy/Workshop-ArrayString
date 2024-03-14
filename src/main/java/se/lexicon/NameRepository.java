@@ -30,39 +30,46 @@ public class NameRepository {
         return names.length;
     }
 
-    public static String[] findByFirstName(final String firstName) {
-        // String testName = firstName;
+    public static String[] findByTestName(final String testName, int num) {
         String[] result = new String[names.length];
-        int index = 0;
+        int i = 0;
         for (String name : names) {
-            if (name.split(" ")[0].equalsIgnoreCase(firstName)) {
-                result[index] = name;
-                index++;
+            if (name.split(" ")[num].equalsIgnoreCase(testName)) {
+                result[i++] = name;
             }
         }
-        result = Arrays.copyOfRange(result, 0, index);
+        result = Arrays.copyOfRange(result, 0, i);
         return result;
+    }
+
+    public static String[] findByFirstName(final String firstName) {
+        if (firstName != null) {
+            return findByTestName(firstName, 0);
+        }
+        return null;
     }
 
     public static String[] findByLastName(final String lastName) {
-        // String testName = lastName;
-        String[] result = new String[names.length];
-        int index = 0;
-        for (String name : names) {
-            if (name.split(" ")[1].equalsIgnoreCase(lastName)) {
-                result[index] = name;
-                index++;
-            }
+        if (lastName != null) {
+            return findByTestName(lastName, 1);
         }
-        result = Arrays.copyOfRange(result, 0, index);
-        return result;
+        return null;
     }
 
-/*
+
     public static boolean update(final String original, final String updatedName) {
+
         //todo: implement the logic
 
-        return null; //result;
+        return false;
     }
-*/
+
+    public static boolean remove(final String fullName) {
+
+        //todo: implement the logic
+
+        return false;
+    }
+
+
 }
