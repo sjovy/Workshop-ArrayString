@@ -30,7 +30,7 @@ public class NameRepository {
         return names.length;
     }
 
-    public static String[] findByTestName(final String testName, int num) {
+    public static String[] findByTestName(final String testName, final int num) {
         String[] result = new String[names.length];
         int i = 0;
         for (String name : names) {
@@ -56,20 +56,39 @@ public class NameRepository {
         return null;
     }
 
-
     public static boolean update(final String original, final String updatedName) {
-
-        //todo: implement the logic
-
+        // Doesn't work if there are more than one copy of original name
+        String foundFulName = find(updatedName);
+        if (foundFulName == null) {
+            for (int i = 0; i < names.length; i++) {
+                if (names[i].equalsIgnoreCase(original)) {
+                    names[i] = updatedName;
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     public static boolean remove(final String fullName) {
-
-        //todo: implement the logic
-
+        // Doesn't work if there are more than one copy of name to remove
+        int i = 0;
+        for (String name : names) {
+            if (!name.equalsIgnoreCase(fullName)) {
+                i++;
+            }
+        }
+        if (i > 0) {
+            String[] newNames = new String[i];
+            int j = 0;
+            for (String name : names) {
+                if (!name.equalsIgnoreCase(fullName)) {
+                    newNames[j++] = name;
+                }
+            }
+            names = newNames;
+            return true;
+        }
         return false;
     }
-
-
 }
